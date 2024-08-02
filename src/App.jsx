@@ -2,15 +2,10 @@ import styled from "styled-components";
 import GlobalStyles from "./styles/GlobalStyles";
 import Button from "./ui/Button";
 import Input from "./ui/Input";
-
-const H1 = styled.h1`
-  font-size: 30px;
-  font-weight: 600;
-  background-color: yellow;
-`;
+import Heading from "./ui/Heading";
+import Row from "./ui/Row";
 
 const StyledApp = styled.div`
-  background-color: orangered;
   padding: 20px;
 `;
 
@@ -19,10 +14,23 @@ export default function App() {
     <>
       <GlobalStyles />
       <StyledApp>
-        <H1>Cabin In The Woods</H1>
-        <Button>Check In</Button>
-        <Button>Check Out</Button>
-        <Input type="number" placeholder="Number of guests" />
+        <Row>
+          <Row type="horizontal">
+            <Heading as="h1">Cabin In The Woods</Heading>
+            <div>
+              <Heading as="h2">Check In and Out</Heading>
+              <Button variation="primary" size="medium">Check In</Button>
+              <Button variation="secondary" size="small">Check Out</Button>
+            </div>
+          </Row>
+          <Row>
+            <form action="">
+              <Heading as="h3">Form</Heading>
+              <Input type="number" placeholder="Number of guests" />
+              <Input type="number" placeholder="Number of guests" />
+            </form>
+          </Row>
+        </Row>
       </StyledApp>
     </>
   );

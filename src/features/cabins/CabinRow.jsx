@@ -7,7 +7,7 @@ import { useDeleteCabin } from "./useDeleteCabin";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import { useCreateCabin } from "./useCreateCabin";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-
+import Menus from "../../ui/Menus";
 
 const Img = styled.img`
   display: block;
@@ -74,25 +74,37 @@ export default function CabinRow({ cabin }) {
         <span>&mdash;</span>
       )}
       <div>
-        <button onClick={handleDuplicate} disabled={isCreating}>
-          <HiSquare2Stack />
-        </button>
         <Modal>
-          <Modal.Open opens={"edit"}>
-            <button>
-              <HiPencil />
-            </button>
-          </Modal.Open>
+          <Menus.Menu>
+            <Menus.Toggle id={cabinId} />
+            <Menus.List id={cabinId}>
+              <Menus.Button icon={HiSquare2Stack} onClick={handleDuplicate}>
+                Copy
+              </Menus.Button>
+              <Modal.Open opens={"edit"}>
+                <Menus.Button icon={HiPencil}>Edit</Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="delete">
+                <Menus.Button
+                  icon={HiTrash}
+                  onClick={() => deleteCabin(cabinId)}
+                >
+                  Delete
+                </Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+          </Menus.Menu>
+
           <Modal.Window name="edit">
             <CreateCabinForm cabinToEdit={cabin} />
           </Modal.Window>
-          <Modal.Open opens="delete">
-            <button>
-              <HiTrash />
-            </button>
-          </Modal.Open>
+
           <Modal.Window name="delete">
-            <ConfirmDelete onConfirm={() => deleteCabin(cabinId)} resourceName="cabin" disabled={isDeleting} />
+            <ConfirmDelete
+              onConfirm={() => deleteCabin(cabinId)}
+              resourceName="cabin"
+              disabled={isDeleting}
+            />
           </Modal.Window>
         </Modal>
       </div>

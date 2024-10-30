@@ -34,7 +34,6 @@ function CheckinBooking() {
   
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
-
   
   const {
     id: bookingId,
@@ -68,9 +67,6 @@ function CheckinBooking() {
       checkin({ bookingId, breakfast: {} });
     }
   }
-
-
-
 
   return (
     <>

@@ -8,11 +8,15 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { useNavigate, useParams } from "react-router-dom";
+import { useDeleteBooking } from "./useDeleteBooking";
+
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -27,6 +31,8 @@ function BookingDetail() {
 
   const moveBack = useMoveBack();
   const { checkOut, isCheckingOut } = useCheckout();
+
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const statusToTagName = {
     unconfirmed: "blue",
@@ -63,6 +69,20 @@ function BookingDetail() {
             Check Out
           </Button>
         }
+
+        <Modal>
+          <Modal.Open opens="delete">
+            <Button variation="danger">Delete Booking</Button>
+          </Modal.Open>
+
+          <Modal.Window name="delete">
+            <ConfirmDelete
+              disabled={isDeleting}
+              resourceName="booking"
+              onConfirm={() => deleteBooking(bookingId, { onSuccess: () => navigate(-1) })} />
+          </Modal.Window>
+        </Modal>
+
         <Button variation="secondary" onClick={moveBack}>
           Back
         </Button>

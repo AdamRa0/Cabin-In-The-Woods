@@ -78,15 +78,15 @@ export default function CabinRow({ cabin }) {
           <Menus.Menu>
             <Menus.Toggle id={cabinId} />
             <Menus.List id={cabinId}>
-              <Menus.Button icon={HiSquare2Stack} onClick={handleDuplicate}>
+              <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
                 Copy
               </Menus.Button>
               <Modal.Open opens={"edit"}>
-                <Menus.Button icon={HiPencil}>Edit</Menus.Button>
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
               <Modal.Open opens="delete">
                 <Menus.Button
-                  icon={HiTrash}
+                  icon={<HiTrash />}
                   onClick={() => deleteCabin(cabinId)}
                 >
                   Delete

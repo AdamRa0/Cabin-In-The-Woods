@@ -16,6 +16,7 @@ import { useBooking } from "./useBooking";
 import { useCheckout } from "../check-in-out/useCheckout";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDeleteBooking } from "./useDeleteBooking";
+import Empty from "../../ui/Empty";
 
 
 const HeadingGroup = styled.div`
@@ -40,7 +41,8 @@ function BookingDetail() {
     "checked-out": "silver",
   };
 
-  if (isLoading) return <Spinner />
+  if (isLoading) return <Spinner />;
+  if (!booking) return <Empty resource='booking' />;
 
   const { status, id } = booking;
 
